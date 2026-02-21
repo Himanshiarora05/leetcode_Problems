@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int towerOfHanoi(int n, int from, int to, int aux) {
+            if (n == 0) return 0;
+        return 2 * towerOfHanoi(n - 1, from, aux, to) + 1;
+    }
+};
+
+
+
+
+
+//algorithm
+void toh(int n,char a,char b , char c){
+  if(n==0) return;
+  toh(n-1,a,c,b);
+  cout<<a<<"->"<<c<<endl;
+  toh(n-1,b,a,c);
+}
