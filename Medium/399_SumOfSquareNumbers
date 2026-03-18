@@ -1,0 +1,41 @@
+// class Solution {
+// public:
+//     bool isPerfectSquare(int n){
+//         int x= sqrt(n);
+//         if(x*x == n) return true;
+//         return false;
+//     }
+//     bool judgeSquareSum(int c) {
+//         int a = 0;
+//         int b = c;
+//         while(a<=b){
+//             if(isPerfectSquare(a) && isPerfectSquare(b)) return true;
+//             if(!isPerfectSquare(b)){
+//                 b = (int)sqrt(b) * (int)sqrt(b);
+//                 a = c-b;
+//             }
+//             else {
+//                 a = ((int)sqrt(a)+1) * ((int)sqrt(a)+1);
+//                 b = c-a;
+//             }
+//         }
+//         return false;
+//     }
+// };
+
+class Solution {
+public:
+    bool judgeSquareSum(int c) {
+        long long a = 0;
+        long long b = sqrt(c);
+
+        while (a <= b) {
+            long long sum = a*a + b*b;
+
+            if (sum == c) return true;
+            else if (sum < c) a++;
+            else b--;
+        }
+        return false;
+    }
+};
