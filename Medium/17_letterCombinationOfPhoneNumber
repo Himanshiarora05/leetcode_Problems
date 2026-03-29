@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void helper(string digits,vector<string>& ans,string output,int idx,string mapping[]){
+        int n= digits.size();
+        if(idx >= n){
+            ans.push_back(output);
+            return;
+        }
+
+        int num = digits[idx] - '0';
+        string val = mapping[num];
+
+        for(int i = 0;i<val.length();i++){
+            output.push_back(val[i]);
+            helper(digits,ans,output,idx+1,mapping);
+            output.pop_back();
+        } 
+
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string> ans;
+        if(digits.length()==0) return ans;
+        string mapping[10] = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        helper(digits,ans,"",0,mapping);
+
+        return ans;
+    }
+};
