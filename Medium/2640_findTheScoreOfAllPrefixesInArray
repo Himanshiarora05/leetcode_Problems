@@ -1,0 +1,14 @@
+class Solution {
+public:
+    vector<long long> findPrefixScore(vector<int>& nums) {
+        int n = nums.size();
+        vector<long long> pre(n);
+        pre[0] = 2*nums[0];
+        int mx = nums[0];
+        for(int i = 1;i<n;i++){
+            mx = max(mx,nums[i]);
+            pre[i] = mx +nums[i] + pre[i-1];
+        }
+        return pre;
+    }
+};
