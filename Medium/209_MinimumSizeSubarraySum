@@ -1,0 +1,24 @@
+//finding minimum k
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int n = nums.size();
+        int len = 0;
+        int minLen = INT_MAX;
+        int ans = 0;
+        int sum =0;
+        int i = 0,j=0;
+        while(j<n){           
+            sum += nums[j];
+            while(sum >= target){  //jo k mila h checking if usii window me choti window miljaye
+                len = j-i+1;     //size of window 
+                minLen = min(len,minLen);
+                ans = minLen;
+                sum -= nums[i];
+                i++;
+            }
+            j++;
+        }
+        return minLen == INT_MAX ? 0:ans;
+    }
+};
