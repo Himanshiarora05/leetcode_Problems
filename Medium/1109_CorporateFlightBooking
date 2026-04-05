@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> corpFlightBookings(vector<vector<int>>& bookings, int n) {
+        vector<int> diff(n + 2, 0);
+        for (auto& b : bookings) {   //we are taking reference to each inner vector inside bookings
+            int st = b[0];
+            int end = b[1];
+            int count = b[2];
+            diff[st] += count;
+            diff[end + 1] -= count;
+        }
+        //cumulative sum
+        vector<int> result;
+        int cumSum = 0;
+        for (int i = 1; i <= n; i++) {
+            cumSum += diff[i];
+            result.push_back(cumSum);
+        }
+        return result;
+    }
+};
+ 
+// line 5 ->
+// for (int i = 0; i < bookings.size(); i++) {
+//     int start = bookings[i][0];
+//     int end = bookings[i][1];
+//     int count = bookings[i][2];
+
+//     diff[start] += count;
+//     diff[end + 1] -= count;
+// }
