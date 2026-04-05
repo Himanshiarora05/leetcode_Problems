@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<int> answerQueries(vector<int>& nums, vector<int>& queries) {
+        int n = nums.size();
+        int m = queries.size();
+        vector<int> ans(m, 0);
+        // sorting
+        sort(nums.begin(), nums.end());
+        // prefix sum
+        for (int i = 1; i < n; i++) {
+            nums[i] += nums[i - 1];
+        }
+        // checking if prefix sum is greater then queries[i]
+        for (int i = 0; i < m; i++) {
+            int len = 0;
+            // Binary search
+            int lo = 0;
+            int hi = n - 1;
+            while (lo <= hi) {
+                int mid = lo + (hi - lo) / 2;
+                if (nums[mid] > queries[i])
+                    hi = mid - 1;
+                else { // nums[mid]<=queries[i]
+                    len = mid + 1;
+                    lo = mid + 1;
+                }
+            }
+            ans[i] = len;
+        }
+        return ans;
+    }
+};
+
+
+
+
+
+
+// optimized this in line 18 by applying BS
+
+// for (int j = 0; j < n; j++) {
+//     if (nums[j] > queries[i]) break;
+//     len++;
+// }
