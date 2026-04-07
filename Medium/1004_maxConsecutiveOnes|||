@@ -1,0 +1,58 @@
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int n = nums.size();
+        int i = 0, j = 0;
+        int flips = 0;
+        int len = 0 , maxLen = 0;
+        while(j<n){
+            if(nums[j]==1) j++;
+            else{ // nums[j] is 0
+                if(flips<k){
+                    flips++;
+                    j++;
+                }
+                else{// humne k numbers ko 0 bna diya
+                    len = j-i;
+                    maxLen = max(len,maxLen);
+                    // i ko uske just aage vale zero k ek idx aage le jao
+                    while(nums[i]==1) i++; //after this 100% nums[i] is 0
+                    i++;
+                    j++;
+                }
+            }
+        }
+        len = j-i;
+        maxLen = max(len,maxLen);  
+        return maxLen;    
+
+    }
+};
+
+
+
+
+// class Solution {
+// public:
+//     int longestOnes(vector<int>& nums, int k) {
+//         int n = nums.size();
+//         int i = 0, j = 0;
+//         int flips = 0;
+//         int len = 0 , maxLen = 0;
+
+//         while(j < n){
+//             if(nums[j] == 0) flips++;
+
+//             while(flips > k){
+//                 if(nums[i] == 0) flips--;
+//                 i++;
+//             }
+
+//             len = j - i + 1;
+//             maxLen = max(len, maxLen);
+//             j++;
+//         }
+
+//         return maxLen;
+//     }
+// };
