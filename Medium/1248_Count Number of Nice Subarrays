@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int helper(vector<int>& nums, int k){
+        if(k<0) return 0;
+        int n = nums.size();
+        int i = 0, j = 0;
+        int sum = 0, count = 0;
+        while(j<n){
+            sum += (nums[j]%2);
+            while(sum > k){
+                sum -= (nums[i]%2);
+                i++;
+            }
+            j++;
+            count += (j-i+1);
+        }
+        return count;
+    }
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        return (helper(nums,k) - helper(nums,k-1)); 
+    }
+};
+
+
+// same problem as -> 930. Binary Subarrays With Sum
+// we just modulo numbers with 2 to get them as binary numbers 
