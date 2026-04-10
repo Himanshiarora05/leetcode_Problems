@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int n = nums.size();
+        int ones = 0 , twos = 0;
+        for(int i = 0;i<n;i++){
+            ones = (ones^nums[i]) & ~twos;   
+            // number goes in ones if it is not in twos (“Keep bits that appear once, but not twice”)
+            twos = (twos^nums[i]) & ~ones;   
+            //number goes in twos only if it is not in ones(“Keep bits that appear twice, but not once”)
+        }
+        return ones;
+    }
+};
+
+
+
+// ones → first occurrence
+// twos → second occurrence
+// 3rd time → vanish from both
