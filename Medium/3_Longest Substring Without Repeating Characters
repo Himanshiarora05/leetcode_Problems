@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n = s.length();
+        if(n == 1) return 1;
+        int i = 0,j = 0, maxlen = 0;
+        int hash[256];
+        for(int k = 0; k < 256; k++) hash[k] = -1;
+        while(j<n){
+            if(hash[s[j]] != -1){ //in the map
+                if(hash[s[j]] >= i){  //in the range for eg. abcbcbb assume i is at b(1 idx) and j is at b (4 idx)
+                    i = hash[s[j]]+1; 
+                }
+            }
+            int len = j-i+1;
+            maxlen = max(maxlen,len);
+            hash[s[j]] = j;    //updating new value of j in the hash 
+            j++;
+        }
+        return maxlen;
+    }
+};
