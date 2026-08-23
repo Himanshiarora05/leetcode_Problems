@@ -13,18 +13,13 @@ public:
         unordered_map<int, int> mp;
         long long count = 0;
 
-        //updating array by ele-rev(ele)
-        for(int i = 0;i<nums.size();i++){
-            nums[i] = nums[i] - reverse(nums[i]);
+        for(int x : nums) {
+            int val = x - reverse(x);
+
+            count += mp[val];
+            mp[val]++;
         }
 
-        for (int i = 0; i < nums.size(); i++) {
-            if (mp.find(nums[i]) != mp.end()) { 
-                count += mp[nums[i]];  //increase count by freq
-            }
-            mp[nums[i]]++;
-        }
-        
         return count % 1000000007;
     }
 };
