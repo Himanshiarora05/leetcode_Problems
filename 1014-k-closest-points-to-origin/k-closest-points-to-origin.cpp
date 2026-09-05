@@ -16,7 +16,6 @@ public:
             ans.push_back(num);
             pq.pop();
         }
-        sort(ans.begin(), ans.end());
         return ans;
     }
 };
