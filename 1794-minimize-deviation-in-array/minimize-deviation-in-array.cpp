@@ -1,25 +1,21 @@
 class Solution {
 public:
-    int minimumDeviation(vector<int>& nums) { 
-        // Max heap
-        priority_queue<int> pq;
-        int mn = INT_MAX;
-        for (int num : nums) {
-            if (num % 2 == 1) {   //Make every number even
-                num *= 2;
-            }
-            pq.push(num);
-            mn = min(mn, num);
+    int minimumDeviation(vector<int>& nums) {
+        priority_queue<int> maxpq; //max heap
+        int mini = INT_MAX , diff = INT_MAX;
+        for(auto ele : nums){
+            if(ele%2 != 0) ele*=2;  //make every odd ele -> even
+            maxpq.push(ele);
+            mini = min(mini,ele);
         }
-        int ans = pq.top() - mn;
-        while (pq.top() % 2 == 0) { //reduce the maximum
-            int mx = pq.top();
-            pq.pop();
-            mx /= 2;
-            pq.push(mx);
-            mn = min(mn, mx);
-            ans = min(ans, pq.top() - mn);
+
+        while(maxpq.top()%2 == 0){ //jab tak pq ka top ele odd na hojaye
+            int x = maxpq.top(); 
+            maxpq.pop();
+            diff = min(diff,x - mini);
+            mini = min(mini,x/2);
+            maxpq.push(x/2);
         }
-        return ans;
+        return min(diff,maxpq.top()- mini);
     }
 };
