@@ -10,7 +10,7 @@ public:
             digits[i] = 0;
         }
         vector<int> ans(n + 1, 0);
-        ans[0] = 1;  //special case when we have array like {9,9,9} it will become {0,0,0} then just add 1 in front of it so that it become {1,0,0,0}
-        return ans; 
+        ans[0] = 1;
+        return ans;
     }
 };
