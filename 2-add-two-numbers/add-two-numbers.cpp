@@ -16,21 +16,18 @@ public:
         ListNode* temp = new ListNode(200);
         ListNode* c = temp;
         int carry = 0;
-        while (a != NULL || b != NULL) {
+        while(a || b|| carry){
             int sum = carry;
-            if (a)  sum += a->val;
-            if (b)  sum += b->val;
-
-            ListNode* newNode = new ListNode(sum % 10);
-            c->next = newNode;
-            c = c->next;
-            carry = sum / 10;
-
-            if (a)  a = a->next;
-            if (b)  b = b->next;
-        }
-        if (carry) {
-            ListNode* newNode = new ListNode(carry);
+            if(a){
+                sum += a->val;
+                a = a->next;
+            }
+            if(b){
+                sum += b->val;
+                b = b->next;
+            }
+            ListNode* newNode = new ListNode(sum%10);
+            carry = sum/10;
             c->next = newNode;
             c = c->next;
         }
